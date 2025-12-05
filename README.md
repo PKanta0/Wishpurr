@@ -83,3 +83,8 @@ front_end/(project)
 - เพิ่มระบบชำระเงินออนไลน์
 - เพิ่มการแนบรูปภาพในรีวิว
 - ขยายระบบรายงานสำหรับผู้ดูแลระบบ
+  
+Live Demo
+Frontend: https://wishpurr.vercel.app
+Backend API: https://wishpurr.onrender.com(/products ใช้ทดสอบ)
+Database: Railway

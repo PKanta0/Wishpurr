@@ -25,3 +25,15 @@ exports.getOrdersWithItemsByUser = async (userId) => {
 
     return result;
 };
+
+exports.getAllOrdersWithItems = async () => {
+    const orders = await orderModel.getAllOrders();
+    const result = [];
+
+    for (const o of orders) {
+        const items = await orderModel.getOrderItems(o.order_id);
+        result.push({ ...o, items });
+    }
+
+    return result;
+};

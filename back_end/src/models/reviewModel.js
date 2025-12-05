@@ -33,3 +33,20 @@ exports.createReview = async (userId, productId, rating, comment) => {
     );
     return result.insertId;
 };
+
+exports.getAllReviews = async () => {
+    const [rows] = await pool.query(
+        `SELECT 
+       r.review_id,
+       r.rating,
+       r.comment,
+       r.created_at,
+       u.user_name,
+       p.name AS product_name
+     FROM reviews r
+     JOIN users u ON r.user_id = u.user_id
+     JOIN products p ON r.product_id = p.product_id
+     ORDER BY r.created_at DESC`
+    );
+    return rows;
+};

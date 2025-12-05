@@ -18,3 +18,7 @@ exports.addReview = async (userId, productId, rating, comment) => {
     );
     return id;
 };
+
+exports.getAllReviews = async () => {
+    return reviewModel.getAllReviews();
+};

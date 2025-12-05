@@ -30,4 +30,13 @@ const createReview = async (req, res) => {
     }
 };
 
-module.exports = { getReviews, createReview };
+const getAllReviews = async (req, res) => {
+    try {
+        const reviews = await reviewService.getAllReviews();
+        res.json(reviews);
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+};
+
+module.exports = { getReviews, createReview, getAllReviews };

@@ -20,3 +20,12 @@ exports.getMyOrders = async (req, res) => {
         res.status(400).json({ error: e.message });
     }
 };
+
+exports.getAllOrders = async (req, res) => {
+    try {
+        const orders = await orderService.getAllOrdersWithItems();
+        res.json(orders);
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+};

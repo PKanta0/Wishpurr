@@ -4,7 +4,10 @@ const controller = require("../controllers/reviewController");
 const { auth } = require("../middleware/authMiddleware");
 
 
+router.get("/all", controller.getAllReviews);
 router.get("/:productId", controller.getReviews);
 router.post("/", auth, controller.createReview);
+
+
 module.exports = router;
 

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BG from "./ComponantsHome/BG";
 import CategoryCard from "./ComponantsHome/CategoryCard";
@@ -5,15 +6,52 @@ import ProductStrip from "./ComponantsHome/ProductStrip";
 import ReviewCard from "./ComponantsHome/ReviewCard";
 import SectionPill from "./ComponantsHome/SectionPill";
 
-// mock 
-const mockReviews = [
-    { id: 1, name: "User A", date: "2024-03-01", rating: 5, comment: "Its so Nice!." },
-    { id: 2, name: "User B", date: "2024-03-02", rating: 5, comment: "My cat loves it." },
-    { id: 3, name: "User C", date: "2024-03-03", rating: 4, comment: "Good quality product." },
-    { id: 4, name: "User D", date: "2024-03-04", rating: 5, comment: "Will buy again for sure." },
-];
+const API_BASE = "http://localhost:4000";
+
+type ReviewItem = {
+    id: number;
+    name: string;
+    date: string;
+    rating: number;
+    comment: string;
+};
 
 export default function Home() {
+
+    const [reviews, setReviews] = useState<ReviewItem[]>([]);
+
+    // ดึงรีวิวจริงจาก backend มาโชว์บนหน้า Home
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const res = await fetch(`${API_BASE}/reviews/all`);
+                const data = await res.json();
+
+                const mapped: ReviewItem[] = data.map((r: any, idx: number) => ({
+                    id: r.review_id ?? r.id ?? idx,
+                    name:
+                        r.user_name && r.product_name
+                            ? `${r.user_name} · ${r.product_name}`
+                            : r.user_name || "ลูกค้าไม่ระบุชื่อ",
+                    date: r.created_at
+                        ? new Date(r.created_at).toLocaleDateString("th-TH")
+                        : "",
+                    rating: r.rating ?? 5,
+                    comment: r.comment ?? "",
+                }));
+
+                setReviews(mapped);
+            } catch (err) {
+                console.error("โหลดรีวิวไม่สำเร็จ", err);
+            }
+        };
+
+        fetchReviews();
+    }, []);
+
+    // เอาแค่ 4 รีวิวล่าสุดมาแสดง
+    const displayReviews = reviews.slice(0, 4);
+
     return (
         <div className="mx-auto w-full px-3 py-3 space-y-16">
             <BG />
@@ -32,12 +70,12 @@ export default function Home() {
 
             {/* Category: สำหรับลูกแมว / สำหรับแมวโต */}
             <section className="grid gap-8 md:grid-cols-2">
-                <CategoryCard label="สำหรับลูกแมว" to="/product/:id" />
-                <CategoryCard label="สำหรับแมวโต" to="/product/:id" />
+                <CategoryCard label="สำหรับลูกแมว" to="/products" />
+                <CategoryCard label="สำหรับแมวโต" to="/products" />
             </section>
 
             {/* แถบสินค้า 4 รูป */}
-            <ProductStrip linkTo="/product/:id" />
+            <ProductStrip linkTo="/products" />
 
             {/* Experience */}
             <section className="grid gap-8">
@@ -48,15 +86,21 @@ export default function Home() {
                 </SectionPill>
 
                 <div className="grid gap-8 md:grid-cols-4">
-                    {mockReviews.map((r) => (
-                        <ReviewCard
-                            key={r.id}
-                            name={r.name}
-                            date={r.date}
-                            rating={r.rating}
-                            comment={r.comment}
-                        />
-                    ))}
+                    {displayReviews.length > 0 ? (
+                        displayReviews.map((r) => (
+                            <ReviewCard
+                                key={r.id}
+                                name={r.name}
+                                date={r.date}
+                                rating={r.rating}
+                                comment={r.comment}
+                            />
+                        ))
+                    ) : (
+                        <p className="col-span-4 text-center text-sm text-gray-500">
+                            ยังไม่มีรีวิว แวะกลับมาดูใหม่เร็ว ๆ นี้นะคะ
+                        </p>
+                    )}
                 </div>
             </section>
 

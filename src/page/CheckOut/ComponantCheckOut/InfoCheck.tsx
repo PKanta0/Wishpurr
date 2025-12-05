@@ -1,7 +1,5 @@
-type infoCheckOut = {
-    label: string;
-    placeholder: string;
-};
+import { infoCheckOut } from "../../../utils/Types";
+
 
 export default function CategoryCard({ label, placeholder }: infoCheckOut) {
     return (

@@ -1,17 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE } from "../../config/api";
+import { Product, FilterType } from "../../utils/Types";
 
-const API_BASE = "http://localhost:4000";
-
-type Product = {
-    product_id: number;
-    name: string;
-    price: number;
-    image_cover: string;
-    category_name?: string;
-};
-
-type FilterType = "all" | "kitten" | "adult" | "special";
 
 export default function AllProducts() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -58,11 +49,16 @@ export default function AllProducts() {
         }
     });
 
-    const baseBtn =
-        "rounded-full px-4 py-1 text-sm transition border";
+    const FILTER_OPTIONS: { value: FilterType; label: string }[] = [
+        { value: "all", label: "ทั้งหมด" },
+        { value: "kitten", label: "สำหรับลูกแมว" },
+        { value: "adult", label: "สำหรับแมวโต" },
+        { value: "special", label: "สูตรพิเศษ" },
+    ];
+
+    const baseBtn = "rounded-full px-4 py-1 text-sm transition border";
     const activeBtn = baseBtn + " border-gray-900 bg-black text-white";
-    const inactiveBtn =
-        baseBtn + " border-gray-300 text-gray-700 hover:border-gray-600";
+    const inactiveBtn = baseBtn + " border-gray-300 text-gray-700 hover:border-gray-600";
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-10 space-y-8">
@@ -76,30 +72,15 @@ export default function AllProducts() {
                 </div>
 
                 <div className="flex flex-wrap gap-3 text-sm">
-                    <button
-                        className={filter === "all" ? activeBtn : inactiveBtn}
-                        onClick={() => setFilter("all")}
-                    >
-                        ทั้งหมด
-                    </button>
-                    <button
-                        className={filter === "kitten" ? activeBtn : inactiveBtn}
-                        onClick={() => setFilter("kitten")}
-                    >
-                        สำหรับลูกแมว
-                    </button>
-                    <button
-                        className={filter === "adult" ? activeBtn : inactiveBtn}
-                        onClick={() => setFilter("adult")}
-                    >
-                        สำหรับแมวโต
-                    </button>
-                    <button
-                        className={filter === "special" ? activeBtn : inactiveBtn}
-                        onClick={() => setFilter("special")}
-                    >
-                        สูตรพิเศษ
-                    </button>
+                    {FILTER_OPTIONS.map((opt) => (
+                        <button
+                            key={opt.value}
+                            className={filter === opt.value ? activeBtn : inactiveBtn}
+                            onClick={() => setFilter(opt.value)}
+                        >
+                            {opt.label}
+                        </button>
+                    ))}
                 </div>
             </section>
 
@@ -131,9 +112,7 @@ export default function AllProducts() {
                             </p>
 
                             <h2 className="text-sm font-semibold line-clamp-2">{p.name}</h2>
-                            <p className="text-sm font-semibold text-[#5b6b32]">
-                                {p.price.toLocaleString()} THB
-                            </p>
+                            <p className="text-sm font-semibold text-[#5b6b32]">{p.price.toLocaleString()} THB </p>
                         </div>
                     </Link>
                 ))}

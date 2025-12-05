@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../img/Logo.png"
+import { getStoredUser, clearAuth, StoredUser } from "../utils/auth";
 
 type User = {
     id: number;
@@ -12,7 +13,7 @@ type User = {
 const Nav = () => {
 
     const navigate = useNavigate();
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<StoredUser | null>(() => getStoredUser());
 
     useEffect(() => {
         const stored = localStorage.getItem("user");
@@ -26,10 +27,9 @@ const Nav = () => {
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        clearAuth();
         setUser(null);
-        navigate("/login");
+        navigate("/");
     };
 
     return (

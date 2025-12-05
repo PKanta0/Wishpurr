@@ -1,21 +1,7 @@
 import { useEffect, useState } from "react";
-
-const API_BASE = "http://localhost:4000";
-
-type AdminProduct = {
-    product_id: number;
-    name: string;
-    price: number;
-    image_cover: string | null;
-    category_name?: string;
-};
-
-type FormState = {
-    name: string;
-    price: string;
-    image_cover: string;
-    category_name: string;
-};
+import { API_BASE } from "../../config/api";
+import { getToken } from "../../utils/auth";
+import { AdminProduct, FormState } from "../../utils/Types"
 
 export default function AdminProducts() {
     const [products, setProducts] = useState<AdminProduct[]>([]);
@@ -29,7 +15,7 @@ export default function AdminProducts() {
         category_name: "ลูกแมว",
     });
 
-    const token = localStorage.getItem("token");
+    const token = getToken();
 
     const fetchProducts = async () => {
         try {

@@ -1,46 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ReviewModal from "../Reviews/ReviewModel";
+import ReviewModel from "../Reviews/ReviewModel";
+import { API_BASE } from "../../config/api";
+import { ProductType, CartItem } from "../../utils/Types";
+import { loadCart, saveCart } from "./ComponantProducts/ProductLogic";
 
-const API_BASE = "http://localhost:4000";
 
-
-type Product = {
-    product_id: number;
-    name: string;
-    description: string;
-    price: number;
-    image_cover: string;
-    category_name?: string;
-};
-
-type CartItem = {
-    product_id: number;
-    name: string;
-    price: number;
-    image_cover: string;
-    qty: number;
-};
-
-const loadCart = (): CartItem[] => {
-    try {
-        const raw = localStorage.getItem("cart");
-        return raw ? JSON.parse(raw) : [];
-    } catch {
-        return [];
-    }
-};
-
-const saveCart = (items: CartItem[]) => {
-    localStorage.setItem("cart", JSON.stringify(items));
-};
 
 export default function Product() {
     const { id } = useParams();
     const navigate = useNavigate();
     const productId = Number(id);
 
-    const [product, setProduct] = useState<Product | null>(null);
+    const [product, setProduct] = useState<ProductType | null>(null);
     const [qty, setQty] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -117,7 +89,7 @@ export default function Product() {
         );
     }
 
-
+    const ButtonCart = "rounded-full bg-white shadow-md border border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
 
     return (
         <div className="mx-auto max-w-5xl px-4 py-10 grid gap-10 md:grid-cols-2">
@@ -141,14 +113,8 @@ export default function Product() {
                 </p>
 
                 <h1 className="text-2xl font-semibold">{product.name}</h1>
-
-                <p className="text-xl font-semibold text-[#5b6b32]">
-                    {product.price.toLocaleString()} THB
-                </p>
-
-                <p className="text-sm leading-relaxed text-gray-700 whitespace-pre-line">
-                    {product.description}
-                </p>
+                <p className="text-xl font-semibold text-[#5b6b32]">{product.price.toLocaleString()} THB</p>
+                <p className="text-sm leading-relaxed text-gray-700 whitespace-pre-line">{product.description}</p>
 
                 {/* จำนวน + ปุ่มเพิ่มลงตะกร้า */}
                 <div className="mt-4 flex flex-col gap-4">
@@ -159,17 +125,15 @@ export default function Product() {
                                 type="button"
                                 onClick={() => setQty((q) => Math.max(1, q - 1))}
                                 className="px-2 text-lg shadow-md rounded-full bg-[#fffdf6]"
-                            >
-                                -
-                            </button>
+                            >-</button>
+
                             <span className="w-6 text-center">{qty}</span>
+
                             <button
                                 type="button"
                                 onClick={() => setQty((q) => q + 1)}
                                 className="px-2 text-lg shadow-md rounded-full bg-[#fffdf6]"
-                            >
-                                +
-                            </button>
+                            >+</button>
                         </div>
                     </div>
 
@@ -177,7 +141,7 @@ export default function Product() {
                         <button
                             type="button"
                             onClick={handleAddToCart}
-                            className="rounded-full bg-white shadow-md border border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
+                            className={ButtonCart}
                         >
                             เพิ่มลงตะกร้า
                         </button>
@@ -185,7 +149,7 @@ export default function Product() {
                         <button
                             type="button"
                             onClick={handleGoCheckout}
-                            className="rounded-full bg-white shadow-md border border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
+                            className={ButtonCart}
                         >
                             ไปหน้าตะกร้า / Checkout
                         </button>
@@ -193,7 +157,7 @@ export default function Product() {
                     <button
                         type="button"
                         onClick={() => setShowReview(true)}
-                        className="w-full rounded-full border bg-white shadow-md border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
+                        className={ButtonCart}
                     >
                         เขียนรีวิวสินค้า
                     </button>
@@ -203,11 +167,11 @@ export default function Product() {
                             เพิ่มสินค้าในตะกร้าแล้ว
                         </p>
                     )}
-                    
+
                 </div>
             </div>
             {showReview && (
-                <ReviewModal
+                <ReviewModel
                     productId={product.product_id}
                     productName={product.name}
                     onClose={() => setShowReview(false)}

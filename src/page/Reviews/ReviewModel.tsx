@@ -1,70 +1,26 @@
-import { useState } from "react";
+import { ReviewModelProps } from "../../utils/Types";
+import { useReviewModel } from "./ReviewModelLogic";
 
-const API_BASE = "http://localhost:4000";
-
-type ReviewModalProps = {
-    productId: number;
-    productName: string;
-    onClose: () => void;
-};
-
-export default function ReviewModal({
+export default function ReviewModel({
     productId,
     productName,
     onClose,
-}: ReviewModalProps) {
-    const [rating, setRating] = useState(5);
-    const [comment, setComment] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState<string | null>(null);
+}: ReviewModelProps) {
 
-    const storedUser = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
-    const user = storedUser ? JSON.parse(storedUser) : null;
+    const {
+        rating,
+        setRating,
+        comment,
+        setComment,
+        loading,
+        successMsg,
+        errorMsg,
+        submit,
+    } = useReviewModel(productId);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (!user || !token) {
-            setMessage("กรุณาเข้าสู่ระบบก่อนเขียนรีวิว");
-            return;
-        }
-
-        if (!comment.trim()) {
-            setMessage("กรุณาเขียนความรู้สึกเล็กน้อยก่อนส่งรีวิว");
-            return;
-        }
-
-        try {
-            setLoading(true);
-            setMessage(null);
-
-            const res = await fetch(`${API_BASE}/reviews`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    productId,
-                    rating,
-                    comment,
-                }),
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.error || "ส่งรีวิวไม่สำเร็จ");
-            }
-
-            setMessage("ส่งรีวิวเรียบร้อยแล้ว ขอบคุณมากค่ะ 🐾");
-            setComment("");
-        } catch (err: any) {
-            setMessage(err.message || "ส่งรีวิวไม่สำเร็จ");
-        } finally {
-            setLoading(false);
-        }
+        submit();
     };
 
     return (
@@ -110,9 +66,8 @@ export default function ReviewModal({
                         />
                     </div>
 
-                    {message && (
-                        <p className="text-xs text-gray-600">{message}</p>
-                    )}
+                    {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
+                    {successMsg && <p className="text-xs text-green-600">{successMsg}</p>}
 
                     <button
                         type="submit"

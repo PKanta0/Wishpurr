@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
+import { API_BASE } from "../../config/api";
+import { getToken } from "../../utils/auth";
+import { AdminReview } from "../../utils/Types"
 
-const API_BASE = "http://localhost:4000";
-
-type AdminReview = {
-    review_id: number;
-    user_name: string;
-    product_name: string;
-    rating: number;
-    comment: string;
-    created_at: string;
-};
 
 export default function AdminReviews() {
     const [reviews, setReviews] = useState<AdminReview[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const token = localStorage.getItem("token");
+    const token = getToken();
 
     const fetchReviews = async () => {
         try {

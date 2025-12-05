@@ -1,8 +1,8 @@
 import logo from "../../img/Logo.png";
 import ReviewCard from "./ReviewCard";
 import { useEffect, useState } from "react";
+import { API_BASE } from "../../config/api";
 
-const API_BASE = "http://localhost:4000";
 
 type Review = {
     review_id: number;

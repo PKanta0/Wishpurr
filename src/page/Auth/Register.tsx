@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RegisterCompo from "./componantAuth/RegisterCompo";
+import { API_BASE } from "../../config/api";
 
-const API_BASE = "http://localhost:4000";
 
 const Register = () => {
     const navigate = useNavigate();

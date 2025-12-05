@@ -1,16 +1,9 @@
 import InfoCheck from "./ComponantCheckOut/InfoCheck"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const API_BASE = "http://localhost:4000";
-
-type CartItem = {
-    product_id: number;
-    name: string;
-    price: number;
-    image_cover: string;
-    qty: number;
-};
+import { API_BASE } from "../../config/api";
+import { getToken } from "../../utils/auth";
+import { CartItem } from "../../utils/Types";
 
 const loadCart = (): CartItem[] => {
     try {
@@ -34,7 +27,7 @@ const CheckOut = () => {
     const [success, setSuccess] = useState<string | null>(null);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = getToken();
         if (!token) {
             navigate("/login");
             return;

@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import BG from "./ComponantsHome/BG";
 import CategoryCard from "./ComponantsHome/CategoryCard";
 import ProductStrip from "./ComponantsHome/ProductStrip";
-import ReviewCard from "./ComponantsHome/ReviewCard";
+import ReviewCardProps from "../Reviews/ReviewCard";
 import SectionPill from "./ComponantsHome/SectionPill";
+import { API_BASE } from "../../config/api";
+import logo from "../../img/Logo.png"
 
-const API_BASE = "http://localhost:4000";
 
 type ReviewItem = {
     id: number;
@@ -88,12 +89,14 @@ export default function Home() {
                 <div className="grid gap-8 md:grid-cols-4">
                     {displayReviews.length > 0 ? (
                         displayReviews.map((r) => (
-                            <ReviewCard
+                            <ReviewCardProps
                                 key={r.id}
+                                id={r.id}
                                 name={r.name}
                                 date={r.date}
                                 rating={r.rating}
                                 comment={r.comment}
+                                logo={logo}
                             />
                         ))
                     ) : (

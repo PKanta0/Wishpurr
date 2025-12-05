@@ -2,28 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminProducts from "./AdminProducts";
 import AdminReviews from "./AdminReviews";
+import { API_BASE } from "../../config/api";
+import { getToken } from "../../utils/auth";
+import { Order, Tab } from "../../utils/Types"
 
-const API_BASE = "http://localhost:4000";
 
-type OrderItem = {
-    order_item_id: number;
-    product_id: number;
-    name: string;
-    qty: number;
-    unit_price: number;
-};
-
-type Order = {
-    order_id: number;
-    user_id: number;
-    user_name: string;
-    email: string;
-    total: number;
-    created_at: string;
-    items: OrderItem[];
-};
-
-type Tab = "orders" | "products" | "reviews";
 
 export default function AdminPage() {
     const navigate = useNavigate();
@@ -36,7 +19,7 @@ export default function AdminPage() {
     useEffect(() => {
         // เช็คสิทธิ์ admin ฝั่ง frontend เบื้องต้น
         const storedUser = localStorage.getItem("user");
-        const token = localStorage.getItem("token");
+        const token = getToken();
 
         if (!storedUser || !token) {
             navigate("/login");

@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import LoginCompo from "./componantAuth/LoginCompo";
-
-const API_BASE = "http://localhost:4000";
+import { API_BASE } from "../../config/api";
+import { saveAuth } from "../../utils/auth"
 
 const Login = () => {
-    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         email: "",
@@ -37,8 +35,7 @@ const Login = () => {
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || "Login failed");
 
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
+            saveAuth(data.token, data.user);
 
             if (data.user.role === "admin") {
                 window.location.href = "/admin";

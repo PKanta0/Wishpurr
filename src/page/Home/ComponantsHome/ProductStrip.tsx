@@ -7,7 +7,6 @@ type ProductStripProps = {
 };
 
 export default function ProductStrip({ count = 4, linkTo }: ProductStripProps) {
-    const Wrapper = linkTo ? Link : "div";
 
     return (
         <section className="flex gap-4 justify-between mr-10 ml-10 flex-wrap">

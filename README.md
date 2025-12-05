@@ -14,22 +14,26 @@
 - ตรวจสอบรายการสั่งซื้อทั้งหมด
 - เพิ่ม แก้ไข และลบสินค้า
 - ลบรีวิวที่ไม่เหมาะสม
+  
 2. สถาปัตยกรรมระบบ
 ระบบแบ่งออกเป็นสามส่วนหลัก
 - Frontend: React + TypeScript + Vite
 - Backend: Node.js + Express
 - Database: MySQL
 ใช้ JSON Web Token (JWT) สำหรับการพิสูจน์ตัวตน และแยกสิทธิ์การเข้าถึงระหว่างผู้ใช้ทั่วไปและผู้ดูแลระบบ
-3.เทคโนโลยีที่ใช้
-Frontend: React, TypeScript, Vite, Tailwind CSS
-Backend: Node.js, Express, JWT, Bcrypt
-Database: MySQL
-4.การติดตั้งและการใช้งาน
-4.1 เตรียมฐานข้อมูล
+
+3. เทคโนโลยีที่ใช้
+- Frontend: React, TypeScript, Vite, Tailwind CSS
+- Backend: Node.js, Express, JWT, Bcrypt
+- Database: MySQL
+  
+4. การติดตั้งและการใช้งาน
+  - 4.1 เตรียมฐานข้อมูล
 สร้างฐานข้อมูล MySQL
 นำไฟล์สร้าง schema และ table (TestSQL.sql)
 ตรวจสอบ table หลัก ได้แก่ users, products, product_images, orders, order_items, reviews, categories
-4.2 รัน Backend
+
+  - 4.2 รัน Backend
 - cd back_end
 - npm install
 - สร้างไฟล์ .env และระบุข้อมูล เช่น
@@ -40,11 +44,13 @@ DB_PASSWORD=...
 DB_NAME=wishpurr_db
 JWT_SECRET=...
 - npm run dev
-4.3 รัน Frontend
+  
+- 4.3 รัน Frontend
 - cd project(main folder)
 - npm install
 - npm run dev
 - เปิดใช้งานผ่าน http://localhost:5173
+  
 5. โครงสร้างโปรเจกต์โดยสรุป
 back_end/
   controllers/
@@ -61,14 +67,17 @@ front_end/(project)
   components/
   layouts/
   page/
-6.unit test
+
+6. unit test
 ผลการทดสอบจะครอบคลุม Authentication, Products, Orders และ Reviews
 - cd back_end
 - npm test
+  
 7. ข้อจำกัดของระบบ
 - ระบบออกแบบเพื่อใช้งานบนเครื่องผู้ใช้เท่านั้น (ไม่รองรับ Cloud Deployment)
 - ไม่มีระบบชำระเงินจริง
 - ไม่มีระบบแจ้งเตือนหรือรายงานขั้นสูง
+  
 8. แนวทางพัฒนาต่อ
 - ปรับปรุงให้รองรับการ deploy บน Cloud
 - เพิ่มระบบชำระเงินออนไลน์

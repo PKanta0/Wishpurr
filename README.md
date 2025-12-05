@@ -44,7 +44,7 @@ JWT_SECRET=...
 - cd project(main folder)
 - npm install
 - npm run dev
-- เข้าผ่าน http://localhost:5173
+- เปิดใช้งานผ่าน http://localhost:5173
 5. โครงสร้างโปรเจกต์โดยสรุป
 back_end/
   controllers/
@@ -61,3 +61,16 @@ front_end/(project)
   components/
   layouts/
   page/
+6.unit test
+ผลการทดสอบจะครอบคลุม Authentication, Products, Orders และ Reviews
+- cd back_end
+- npm test
+7. ข้อจำกัดของระบบ
+- ระบบออกแบบเพื่อใช้งานบนเครื่องผู้ใช้เท่านั้น (ไม่รองรับ Cloud Deployment)
+- ไม่มีระบบชำระเงินจริง
+- ไม่มีระบบแจ้งเตือนหรือรายงานขั้นสูง
+8. แนวทางพัฒนาต่อ
+- ปรับปรุงให้รองรับการ deploy บน Cloud
+- เพิ่มระบบชำระเงินออนไลน์
+- เพิ่มการแนบรูปภาพในรีวิว
+- ขยายระบบรายงานสำหรับผู้ดูแลระบบ

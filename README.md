@@ -46,18 +46,18 @@ JWT_SECRET=...
 - npm run dev
 - เข้าผ่าน http://localhost:5173
 5. โครงสร้างโปรเจกต์โดยสรุป
--back_end/
----controllers/
----services/
----routes/
----models/
----middleware/
----config/
+back_end/
+  controllers/
+  services/
+  routes/
+  models/
+  middleware/
+  config/
 
 front_end/(project)
--src/
----api/
----utils/
----components/
----layouts/
----page/
+  src/
+  api/
+  utils/
+  components/
+  layouts/
+  page/

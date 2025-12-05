@@ -1,4 +1,3 @@
-// back_end/__tests__/auth.test.js
 const request = require("supertest");
 const app = require("../src/app");
 const db = require("../src/config/db");

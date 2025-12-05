@@ -1,4 +1,3 @@
-// back_end/__tests__/reviews.test.js
 const request = require("supertest");
 const app = require("../src/app");
 const db = require("../src/config/db");
@@ -7,7 +6,7 @@ const bcrypt = require("bcrypt");
 let userToken = "";
 const reviewUserEmail = "jestreview@example.com";
 const reviewUserPassword = "review123";
-const productId = 1; // ต้องมีสินค้าตัวนี้จริงใน DB
+const productId = 1;
 
 beforeAll(async () => {
     const hash = await bcrypt.hash(reviewUserPassword, 10);

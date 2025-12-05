@@ -25,36 +25,6 @@ const AdminLayout = () => {
                     >
                         ภาพรวม (Dashboard)
                     </NavLink>
-
-                    <NavLink
-                        to="/admin/products"
-                        className={({ isActive }) =>
-                            `block px-3 py-2 rounded-lg ${isActive ? "bg-slate-900 text-white" : "text-gray-700 hover:bg-slate-100"
-                            }`
-                        }
-                    >
-                        จัดการสินค้า
-                    </NavLink>
-
-                    <NavLink
-                        to="/admin/orders"
-                        className={({ isActive }) =>
-                            `block px-3 py-2 rounded-lg ${isActive ? "bg-slate-900 text-white" : "text-gray-700 hover:bg-slate-100"
-                            }`
-                        }
-                    >
-                        คำสั่งซื้อ
-                    </NavLink>
-
-                    <NavLink
-                        to="/admin/reviews"
-                        className={({ isActive }) =>
-                            `block px-3 py-2 rounded-lg ${isActive ? "bg-slate-900 text-white" : "text-gray-700 hover:bg-slate-100"
-                            }`
-                        }
-                    >
-                        รีวิวสินค้า
-                    </NavLink>
                 </nav>
 
                 <div className="px-4 py-3 border-t text-xs text-gray-500">

@@ -39,4 +39,15 @@ const getAllReviews = async (req, res) => {
     }
 };
 
-module.exports = { getReviews, createReview, getAllReviews };
+const deleteReview = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await reviewService.deleteReview(id);
+        res.json({ message: "deleted" });
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+};
+
+
+module.exports = { getReviews, createReview, getAllReviews, deleteReview };

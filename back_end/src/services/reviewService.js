@@ -22,3 +22,5 @@ exports.addReview = async (userId, productId, rating, comment) => {
 exports.getAllReviews = async () => {
     return reviewModel.getAllReviews();
 };
+
+exports.deleteReview = (id) => reviewModel.deleteReview(id);

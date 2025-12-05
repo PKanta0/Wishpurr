@@ -154,11 +154,11 @@ export default function Product() {
                 <div className="mt-4 flex flex-col gap-4">
                     <div className="flex items-center gap-3 text-sm">
                         <span>จำนวน:</span>
-                        <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1">
+                        <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 bg-white shadow-md">
                             <button
                                 type="button"
                                 onClick={() => setQty((q) => Math.max(1, q - 1))}
-                                className="px-2 text-lg"
+                                className="px-2 text-lg shadow-md rounded-full bg-[#fffdf6]"
                             >
                                 -
                             </button>
@@ -166,7 +166,7 @@ export default function Product() {
                             <button
                                 type="button"
                                 onClick={() => setQty((q) => q + 1)}
-                                className="px-2 text-lg"
+                                className="px-2 text-lg shadow-md rounded-full bg-[#fffdf6]"
                             >
                                 +
                             </button>
@@ -177,7 +177,7 @@ export default function Product() {
                         <button
                             type="button"
                             onClick={handleAddToCart}
-                            className="rounded-full bg-black px-6 py-2 text-sm text-white hover:opacity-90"
+                            className="rounded-full bg-white shadow-md border border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
                         >
                             เพิ่มลงตะกร้า
                         </button>
@@ -185,7 +185,7 @@ export default function Product() {
                         <button
                             type="button"
                             onClick={handleGoCheckout}
-                            className="rounded-full border border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
+                            className="rounded-full bg-white shadow-md border border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
                         >
                             ไปหน้าตะกร้า / Checkout
                         </button>
@@ -193,7 +193,7 @@ export default function Product() {
                     <button
                         type="button"
                         onClick={() => setShowReview(true)}
-                        className="w-full rounded-full border border-gray-700 py-2 text-sm hover:bg-gray-100"
+                        className="w-full rounded-full border bg-white shadow-md border-gray-800 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white"
                     >
                         เขียนรีวิวสินค้า
                     </button>

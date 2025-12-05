@@ -12,3 +12,7 @@ exports.getProductDetail = async (id) => {
     const images = await productModel.getImagesByProductId(id);
     return { ...product, images };
 };
+
+exports.createProduct = (body) => productModel.createProduct(body);
+exports.updateProduct = (id, body) => productModel.updateProduct(id, body);
+exports.deleteProduct = (id) => productModel.deleteProduct(id);

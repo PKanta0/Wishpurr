@@ -50,3 +50,11 @@ exports.getAllReviews = async () => {
     );
     return rows;
 };
+
+exports.deleteReview = async (id) => {
+    const [result] = await pool.query(
+        `DELETE FROM reviews WHERE review_id = ?`,
+        [id]
+    );
+    if (result.affectedRows === 0) throw new Error("Review not found");
+};

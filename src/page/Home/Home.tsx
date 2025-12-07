@@ -7,6 +7,10 @@ import ReviewCardProps from "../Reviews/ReviewCard";
 import SectionPill from "./ComponantsHome/SectionPill";
 import { API_BASE } from "../../config/api";
 import logo from "../../img/Logo.png"
+import product1 from "../../../src/img/product1.png"
+import product2 from "../../../src/img/product2.png"
+import product3 from "../../../src/img/product3.png"
+import product4 from "../../../src/img/product4.png"
 
 
 type ReviewItem = {
@@ -76,7 +80,13 @@ export default function Home() {
             </section>
 
             {/* แถบสินค้า 4 รูป */}
-            <ProductStrip linkTo="/products" />
+            <section className="flex gap-4 justify-between mr-10 ml-10 flex-wrap">
+                <ProductStrip src={product1} linkTo="/products" />
+                <ProductStrip src={product2} linkTo="/products" />
+                <ProductStrip src={product3} linkTo="/products" />
+                <ProductStrip src={product4} linkTo="/products" />
+            </section>
+            
 
             {/* Experience */}
             <section className="grid gap-8">
@@ -113,7 +123,12 @@ export default function Home() {
                     <p>Coming Soon</p>
                 </SectionPill>
 
-                <ProductStrip />
+                <section className="flex gap-4 justify-between mr-10 ml-10 flex-wrap">
+                    <ProductStrip src={product1} linkTo="/products" />
+                    <ProductStrip src={product2} linkTo="/products" />
+                    <ProductStrip src={product3} linkTo="/products" />
+                    <ProductStrip src={product4} linkTo="/products" />
+                </section>
             </section>
         </div>
     );

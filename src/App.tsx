@@ -12,6 +12,7 @@ import Login from "./page/Auth/Login";
 import Register from "./page/Auth/Register";
 import Admin from "./page/Admin/Admin";
 import ForgotPassword from "./page/Auth/ForgotPassword";
+import MyContact from "./page/contactUs/MyContact"
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/product/:id" element={<Product />} />
         <Route path="/reviews" element={<Review />} />
         <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/Mycontact" element={<MyContact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

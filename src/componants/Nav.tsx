@@ -53,7 +53,7 @@ const Nav = () => {
                         <Link to="/" className="hover:opacity-70">Home</Link>
                         <Link to="/products" className="hover:opacity-70">Product</Link>
                         <Link to="/reviews" className="hover:opacity-70">Reviews</Link>
-                        <Link to="/contact" className="hover:opacity-70">Contact us</Link>
+                        <Link to="/MyContact" className="hover:opacity-70">Contact us</Link>
 
                         {user?.role === "admin" && <Link to="/admin">Admin</Link>}
 
@@ -113,7 +113,7 @@ const Nav = () => {
                         <Link to="/">Home</Link>
                         <Link to="/products">Product</Link>
                         <Link to="/reviews">Reviews</Link>
-                        <Link to="/contact">Contact us</Link>
+                        <Link to="/Mycontact">Contact us</Link>
                         <hr className="my-2" />
                     </div>
                 </div>

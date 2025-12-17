@@ -2,6 +2,7 @@ import logo from "../../img/Logo.png";
 import ReviewCard from "./ReviewCard";
 import { useEffect, useState } from "react";
 import { API_BASE } from "../../config/api";
+import LoadingPage from "../../utils/Loading";
 
 
 type Review = {
@@ -42,8 +43,8 @@ export default function Review() {
 
     if (loading) {
         return (
-            <div className="px-4 py-10">
-                Loading reviews...
+            <div className="grid justify-center  px-4 py-10">
+                <LoadingPage />
             </div>
         );
     }

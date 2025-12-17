@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE } from "../../config/api";
 import { Product, FilterType } from "../../utils/Types";
-
+import LoadingPage from "../../utils/Loading";
 
 export default function AllProducts() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -27,7 +27,8 @@ export default function AllProducts() {
     }, []);
 
     if (loading) {
-        return <div className="px-10 py-10">Loading products...</div>;
+        return <div className="grid justify-center px-10 py-10">
+            <LoadingPage /></div>;
     }
 
     if (error) {
